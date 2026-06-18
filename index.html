@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NutritionTrak</title>
+    <meta name="description" content="NutritionTrak — AI-powered nutrition tracking, halal guide, recipes, and restaurant discovery." />
+
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #0b1220;
+        --card: rgba(255, 255, 255, 0.06);
+        --cardBorder: rgba(255, 255, 255, 0.12);
+        --text: rgba(255, 255, 255, 0.92);
+        --muted: rgba(255, 255, 255, 0.72);
+        --accent: #22c55e;
+        --accent2: #60a5fa;
+        --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      }
+
+      @media (prefers-color-scheme: light) {
+        :root {
+          --bg: #f6f8fc;
+          --card: rgba(255, 255, 255, 0.9);
+          --cardBorder: rgba(15, 23, 42, 0.10);
+          --text: rgba(15, 23, 42, 0.92);
+          --muted: rgba(15, 23, 42, 0.72);
+          --shadow: 0 20px 60px rgba(15, 23, 42, 0.12);
+        }
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(1000px 600px at 20% -10%, rgba(96, 165, 250, 0.25), transparent 60%),
+          radial-gradient(1000px 600px at 85% 10%, rgba(34, 197, 94, 0.20), transparent 60%),
+          var(--bg);
+      }
+
+      a { color: inherit; text-decoration: none; }
+      .wrap { max-width: 1080px; margin: 0 auto; padding: 28px 16px 60px; }
+      header { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+      .brand {
+        display: flex; align-items: center; gap: 12px;
+        font-weight: 800; letter-spacing: 0.2px;
+      }
+      .logo {
+        width: 40px; height: 40px; border-radius: 12px;
+        background: linear-gradient(135deg, var(--accent2), var(--accent));
+        box-shadow: var(--shadow);
+      }
+      .pill {
+        display: inline-flex; align-items: center; gap: 8px;
+        padding: 10px 12px; border-radius: 999px;
+        background: var(--card);
+        border: 1px solid var(--cardBorder);
+        backdrop-filter: blur(10px);
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      .hero {
+        margin-top: 28px;
+        padding: 26px;
+        border-radius: 22px;
+        background: var(--card);
+        border: 1px solid var(--cardBorder);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(12px);
+      }
+      .hero h1 { margin: 0; font-size: clamp(28px, 4vw, 44px); line-height: 1.1; }
+      .hero p { margin: 12px 0 0; color: var(--muted); font-size: 16px; max-width: 70ch; }
+
+      .grid {
+        margin-top: 18px;
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 14px;
+      }
+
+      .card {
+        grid-column: span 12;
+        padding: 16px;
+        border-radius: 18px;
+        background: var(--card);
+        border: 1px solid var(--cardBorder);
+        box-shadow: 0 10px 30px rgba(0,0,0,.12);
+      }
+      .card h2 { margin: 0 0 6px; font-size: 16px; }
+      .card p { margin: 0 0 12px; color: var(--muted); font-size: 14px; }
+
+      @media (min-width: 860px) {
+        .card.half { grid-column: span 6; }
+        .card.third { grid-column: span 4; }
+      }
+
+      .btnRow { display: flex; flex-wrap: wrap; gap: 10px; }
+      .btn {
+        display: inline-flex; align-items: center; justify-content: center;
+        gap: 8px;
+        padding: 11px 14px;
+        border-radius: 12px;
+        border: 1px solid var(--cardBorder);
+        background: rgba(255,255,255,0.02);
+        color: var(--text);
+        font-weight: 650;
+        font-size: 14px;
+        transition: transform 0.08s ease, border-color 0.15s ease, background 0.15s ease;
+      }
+      .btn:hover { transform: translateY(-1px); border-color: rgba(96,165,250,0.45); background: rgba(96,165,250,0.10); }
+      .btn.primary { border-color: rgba(34,197,94,0.55); background: rgba(34,197,94,0.12); }
+      .btn.primary:hover { border-color: rgba(34,197,94,0.8); background: rgba(34,197,94,0.18); }
+      .btn.ghost:hover { border-color: rgba(255,255,255,0.22); background: rgba(255,255,255,0.06); }
+
+      footer {
+        margin-top: 24px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        align-items: center;
+        justify-content: space-between;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .links { display: flex; flex-wrap: wrap; gap: 12px; }
+      .links a { text-decoration: underline; text-underline-offset: 3px; }
+    </style>
+  </head>
+
+  <body>
+    <div class="wrap">
+      <header>
+        <div class="brand">
+          <div class="logo" aria-hidden="true"></div>
+          <div>NutritionTrak</div>
+        </div>
+        <div class="pill" title="API base">
+          <span>API:</span>
+          <span><strong>api.mywaitime.com</strong></span>
+        </div>
+      </header>
+
+      <section class="hero">
+        <h1>Track nutrition. Discover halal options. Get results fast.</h1>
+        <p>
+          NutritionTrak helps you analyze foods, explore recipes, and find restaurants. Optional syncing keeps your
+          favorites and reviews across sessions.
+        </p>
+
+        <div class="grid">
+          <div class="card half">
+            <h2>Get the app</h2>
+            <p>Download for Android or iOS.</p>
+            <div class="btnRow">
+              <a class="btn primary" href="#" id="androidLink">Android (Google Play)</a>
+              <a class="btn primary" href="#" id="iosLink">iOS (App Store)</a>
+            </div>
+            <p style="margin-top:10px; font-size:12px; color: var(--muted);">
+              If you don’t have store links yet, set them later — the buttons are ready.
+            </p>
+          </div>
+
+          <div class="card half">
+            <h2>Web</h2>
+            <p>Use the companion tools and pages.</p>
+            <div class="btnRow">
+              <a class="btn" href="diet-explorer.html">Diet Explorer (web)</a>
+              <a class="btn" href="diet-manager.html">Diet Manager</a>
+              <a class="btn" href="units.html">Unit Converter</a>
+            </div>
+          </div>
+
+          <div class="card third">
+            <h2>Privacy</h2>
+            <p>Read how data is handled and stored.</p>
+            <div class="btnRow">
+              <a class="btn ghost" href="privacy.html">Privacy Policy</a>
+            </div>
+          </div>
+
+          <div class="card third">
+            <h2>Support</h2>
+            <p>Need help or have feedback?</p>
+            <div class="btnRow">
+              <a class="btn ghost" href="mailto:zub165@yahoo.com">Email support</a>
+              <a class="btn ghost" href="support.md">Support info</a>
+            </div>
+          </div>
+
+          <div class="card third">
+            <h2>API health</h2>
+            <p>Check backend service status.</p>
+            <div class="btnRow">
+              <a class="btn ghost" href="https://api.mywaitime.com/api/nutrition/v1/health/" target="_blank" rel="noreferrer">Health endpoint</a>
+            </div>
+          </div>
+        </div>
+
+        <footer>
+          <div>&copy; 2026 NutritionTrak</div>
+          <div class="links">
+            <a href="privacy.html">Privacy</a>
+            <a href="https://api.mywaitime.com" target="_blank" rel="noreferrer">Backend</a>
+            <a href="diet-explorer.html">Diet Explorer</a>
+          </div>
+        </footer>
+      </section>
+    </div>
+
+    <script>
+      // Set these to your real store / web links.
+      // Keeping them in JS makes it easy to update without touching layout.
+      const LINKS = {
+        android: 'https://play.google.com/store/apps/details?id=com.healthtracker.nutrition',
+        ios: 'https://apps.apple.com/us/app/nutritiontrak/id6751174526',
+      };
+
+      const a = document.getElementById('androidLink');
+      const i = document.getElementById('iosLink');
+      if (LINKS.android) a.href = LINKS.android;
+      if (LINKS.ios) i.href = LINKS.ios;
+    </script>
+  </body>
+</html>
+
